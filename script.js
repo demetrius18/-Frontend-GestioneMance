@@ -1,6 +1,6 @@
 let importi = [];
 const membri = ["Andrea","Gaetano","Margen","Simone","Manuela","Dmitri"];
-const API_URL = "https://TUO_BACKEND.onrender.com/invia-mance"; // 🔴 Cambia con l'URL reale
+const API_URL = "https://TUO_BACKEND.onrender.com/invia-mance";
 
 function aggiornaStatistiche() {
   const statBox = document.getElementById('statistiche');
