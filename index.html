@@ -306,12 +306,32 @@ function aggiornaTabella(){
     });
 }
 
-function apriGruppo(){
+async function apriGruppo() {
     const messaggio = document.getElementById('messaggio').value;
-    if(!messaggio){ alert("Inserisci almeno un importo."); return; }
-    const url = `https://t.me/${gruppoUsername}?text=${encodeURIComponent(messaggio)}`;
-    window.open(url,'_blank');
+    if (!messaggio) {
+        alert("Inserisci almeno un importo.");
+        return;
+    }
+
+    try {
+        const res = await fetch("https://backend-gestionemance.onrender.com/invia-mance", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ totale: importi.reduce((a, b) => a + b, 0) })
+        });
+
+        const data = await res.json();
+        if (data.success) {
+            alert("✅ Messaggio inviato al gruppo!");
+        } else {
+            alert("❌ Errore: " + (data.error || "Invio fallito"));
+        }
+    } catch (err) {
+        console.error(err);
+        alert("⚠️ Errore di connessione col backend");
+    }
 }
+
 </script>
 
 </body>
