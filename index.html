@@ -50,9 +50,7 @@
       cursor: pointer;
       transition: 0.2s;
     }
-    button:hover {
-      background: #005bb5;
-    }
+    button:hover { background: #005bb5; }
     .status {
       text-align: center;
       margin-top: 15px;
@@ -74,7 +72,7 @@
   </div>
 
   <script>
-    const backendUrl = "https://backend-z6hp.onrender.com/"; // Backend su Render
+    const backendUrl = "https://backend-z6hp.onrender.com";
 
     document.getElementById("manciaForm").addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -99,7 +97,8 @@
           statusEl.className = "status success";
           document.getElementById("manciaForm").reset();
         } else {
-          statusEl.textContent = "❌ Errore dal server.";
+          const err = await response.json();
+          statusEl.textContent = "❌ Errore dal server: " + (err.error || "sconosciuto");
           statusEl.className = "status error";
         }
       } catch (err) {
